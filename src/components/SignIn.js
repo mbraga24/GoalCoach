@@ -4,7 +4,7 @@ import styles from './SignIn.module.sass'
 import { Link } from 'react-router-dom';
 import { firebaseApp } from '../firebase';
 
-const SignIn = () => {
+const SignIn = props => {
 
   const [ email, setEmail, resetEmail ] = userInputState("")
   const [ password, setPassword, resetPassword ] = userInputState("")
@@ -18,8 +18,6 @@ const SignIn = () => {
       setErrorMsg(error.message)
     })
 
-    console.log(email)
-    console.log(password)
     resetEmail()
     resetPassword()
   }

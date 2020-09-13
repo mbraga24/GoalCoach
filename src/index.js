@@ -11,6 +11,7 @@ import * as serviceWorker from './serviceWorker';
 firebaseApp.auth().onAuthStateChanged(user => {
   if (user) {
     console.log('User has signed in or up', user)
+    browserHistory.push('/app')
   } else {
     console.log('User has signed out or still needs to sign in')
   }
