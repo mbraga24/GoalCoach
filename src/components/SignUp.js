@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import userInputState from '../hooks/userInputState';
+import { firebaseApp } from '../firebase';
 
 const SignUp = () => {
 
   const [ email, setEmail, resetEmail ] = userInputState("")
   const [ password, setPassword, resetPassword ] = userInputState("")
+  const [ errorMsg, setErrorMsg ] = useState("")
 
   const handleSubmit = e => {
     e.preventDefault()
+
+    firebaseApp.auth().createUserWithEmailAndPassword(email, password)
+    .catch(error => {
+      setErrorMsg(error.message)
+    })
 
     console.log(email)
     console.log(password)
@@ -42,6 +49,12 @@ const SignUp = () => {
           </button>
         </div>
       </div>
+      {
+        errorMsg.length !== 0 && 
+        <div className="alert alert-danger" role="alert">
+          {errorMsg}
+        </div>
+      }
     </form>
   );
 }
