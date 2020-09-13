@@ -1,15 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import App from './components/App';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import { firebaseApp } from './firebase';
+import './index.css';
 import * as serviceWorker from './serviceWorker';
 
+// firebaseApp.auth().onAuthStateChanged(user => {
+//   if (user) {
+//     console.log('User has signed in or up', user)
+//   } else {
+//     console.log('User has signed out or still needs to sign in')
+//   }
+// })
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <Switch>
+      <Route path="/app" component={App}/>
+      <Route path="/signin" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
+    </Switch>
+  </Router>,
   document.getElementById('root')
 );
 
