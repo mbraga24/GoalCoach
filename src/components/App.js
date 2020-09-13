@@ -1,23 +1,22 @@
 import React from 'react';
-import { firebaseApp } from '../firebase';
+// import { firebaseApp } from '../firebase';
+import { Switch, Route } from 'react-router-dom';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import Dashboard from './Dashboard';
 import './App.css';
 
 const App = () => {
 
-  const signOut = () => {
-    firebaseApp.auth().signOut()
-  }
-
   return (
-      <div>
-        <button
-        className="btn btn-danger"
-        onClick={signOut}
-        >
-          Sign Out
-        </button>
-      </div>
-      );
+    <div>
+      <Switch>
+        <Route path="/dashboard" component={Dashboard}/>
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
+      </Switch>
+    </div>
+    );
 }
 
 export default App;

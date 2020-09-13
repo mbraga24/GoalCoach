@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import userInputState from '../hooks/userInputState';
 import styles from './SignIn.module.sass'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { firebaseApp } from '../firebase';
 
 const SignIn = props => {
@@ -13,13 +13,24 @@ const SignIn = props => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    firebaseApp.auth().signInWithEmailAndPassword(email, password)
+    // firebaseApp.auth().signInWithEmailAndPassword(email, password)
+    // .catch(error => {
+    //   setErrorMsg(error.message)
+    // })
+
+    firebaseApp.auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(user => {
+      if (user) {
+        console.log('user has signed in', user);
+        resetEmail()
+        resetPassword()        
+        props.history.push('/dashboard')
+      }
+    })
     .catch(error => {
       setErrorMsg(error.message)
     })
-
-    resetEmail()
-    resetPassword()
   }
 
   return (
@@ -64,4 +75,4 @@ const SignIn = props => {
   );
 }
 
-export default SignIn;
+export default withRouter(SignIn);

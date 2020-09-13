@@ -4,7 +4,7 @@ import userInputState from '../hooks/userInputState';
 import styles from './SignUp.module.sass'
 import { firebaseApp } from '../firebase';
 
-const SignUp = () => {
+const SignUp = props => {
 
   const [ email, setEmail, resetEmail ] = userInputState("")
   const [ password, setPassword, resetPassword ] = userInputState("")
@@ -13,13 +13,23 @@ const SignUp = () => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    firebaseApp.auth().createUserWithEmailAndPassword(email, password)
+    // firebaseApp.auth().createUserWithEmailAndPassword(email, password)
+    // .catch(error => {
+    //   setErrorMsg(error.message)
+    // })
+
+    firebaseApp.auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(user => {
+      if (user) {
+        console.log('User has signed up', user)
+        props.history.push('/dashboard')
+      }
+    })
     .catch(error => {
       setErrorMsg(error.message)
     })
 
-    console.log(email)
-    console.log(password)
     resetEmail()
     resetPassword()
   }
