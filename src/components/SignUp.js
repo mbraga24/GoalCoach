@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import userInputState from '../hooks/userInputState';
 import styles from './SignUp.module.sass'
 import { firebaseApp } from '../firebase';
@@ -24,8 +25,8 @@ const SignUp = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className={`${styles.SignUpForm} form-inline`}>
+    <form onSubmit={handleSubmit} className={styles.SignUpForm}>
+      <div className="form-inline">
         <h2>Sign Up</h2>
         <div className="form-group">
           <input 
@@ -56,6 +57,11 @@ const SignUp = () => {
           {errorMsg}
         </div>
       }
+      <div>
+        <Link to={'/signin'}>
+          Sign in instead
+        </Link>
+      </div>
     </form>
   );
 }
