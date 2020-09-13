@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import userInputState from '../hooks/userInputState';
+import styles from './SignUp.module.sass'
 import { firebaseApp } from '../firebase';
 
 const SignUp = () => {
@@ -24,7 +25,7 @@ const SignUp = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-inline">
+      <div className={`${styles.SignUpForm} form-inline`}>
         <h2>Sign Up</h2>
         <div className="form-group">
           <input 
