@@ -59,7 +59,7 @@ const SignUp = () => {
       }
       <div>
         <Link to={'/signin'}>
-          Sign in instead
+          Already a user? Sign in instead
         </Link>
       </div>
     </form>
