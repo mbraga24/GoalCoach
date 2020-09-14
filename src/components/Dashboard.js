@@ -7,6 +7,7 @@ const Dashboard = props => {
   const signOut = () => {
     firebaseApp.auth().signOut()
     props.history.push('/signin')
+    props.resetUser(null)
   }
 
   console.log(props.history)

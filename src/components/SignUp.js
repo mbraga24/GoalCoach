@@ -9,27 +9,25 @@ const SignUp = props => {
   const [ email, setEmail ] = userInputState("")
   const [ password, setPassword ] = userInputState("")
   const [ errorMsg, setErrorMsg ] = useState("")
+  const [ isItVisible, setIsItVisible ] = useState(false)
+
+  const dismissMessage = () => {
+    setTimeout(() => { 
+      setIsItVisible(false)
+    }, 2000);
+  }
 
   const handleSubmit = e => {
     e.preventDefault()
+    console.log(email, password)
 
     firebaseApp.auth().createUserWithEmailAndPassword(email, password)
     .catch(error => {
       setErrorMsg(error.message)
+      setIsItVisible(true)
+      dismissMessage()
     })
   }
-
-  //   firebaseApp.auth()
-  //   .createUserWithEmailAndPassword(email, password)
-  //   .then(user => {
-  //     if (user) {
-  //       console.log('User has signed up', user)
-  //       props.history.push('/dashboard')
-  //     }
-  //   })
-  //   .catch(error => {
-  //     setErrorMsg(error.message)
-  //   })
 
   return (
     <form onSubmit={handleSubmit} className={styles.SignUpForm}>
@@ -59,7 +57,7 @@ const SignUp = props => {
         </div>
       </div>
       {
-        errorMsg.length !== 0 && 
+        (errorMsg.length !== 0 && isItVisible) &&
         <div className="alert alert-danger" role="alert">
           {errorMsg}
         </div>

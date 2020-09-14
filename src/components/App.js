@@ -1,31 +1,45 @@
-import React from 'react';
-// import { firebaseApp } from '../firebase';
-import { Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Dashboard from './Dashboard';
 import './App.css';
 import { firebaseApp } from '../firebase';
 
-const App = () => {
+const App = props => {
 
-  firebaseApp.auth().onAuthStateChanged(user => {
-    if (user) {
-      console.log('user has signed in or up', user)
-    } else {
-      console.log('user has signed out or still need to sign in')
-    }
-  })
+  const [ user, setUser ] = useState(null)
 
+  useEffect(() => {
+    firebaseApp.auth().onAuthStateChanged(authUser => {
+      if (authUser) {
+        setUser(authUser)
+      } else {
+        setUser(null)
+      }
+    })
+  }, [user])
+
+  // console.log("APP: ", user)
   return (
     <div>
       <Switch>
-        <Route path="/dashboard" component={Dashboard}/>
-        <Route path="/signin" component={SignIn} />
-        <Route path="/signup" component={SignUp} />
+        {
+          user ?
+          <>
+            <Route path="/dashboard" render={ () => <Dashboard resetUser={setUser}/>}/>
+            <Redirect to="/dashboard" />
+          </> 
+          :
+          <>
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUp} />
+            <Redirect to="/signin" />
+          </>
+        }
       </Switch>
     </div>
     );
 }
 
-export default App;
+export default withRouter(App);
