@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Dashboard from './Dashboard';
@@ -14,14 +14,13 @@ const App = props => {
     firebaseApp.auth().onAuthStateChanged(authUser => {
       if (authUser) {
         setUser(authUser)
-        console.log(authUser)
       } else {
         setUser(null)
       }
     })
   }, [user])
 
-  console.log("APP: ", props.history)
+  // console.log("APP: ", user)
   return (
     <div>
       <Switch>
@@ -29,11 +28,13 @@ const App = props => {
           user ?
           <>
             <Route path="/dashboard" render={ () => <Dashboard resetUser={setUser}/>}/>
-          </>
-          : 
+            <Redirect to="/dashboard" />
+          </> 
+          :
           <>
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
+            <Redirect to="/signin" />
           </>
         }
       </Switch>

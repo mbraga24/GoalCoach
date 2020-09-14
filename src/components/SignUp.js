@@ -9,14 +9,23 @@ const SignUp = props => {
   const [ email, setEmail ] = userInputState("")
   const [ password, setPassword ] = userInputState("")
   const [ errorMsg, setErrorMsg ] = useState("")
+  const [ isItVisible, setIsItVisible ] = useState(false)
+
+  const dismissMessage = () => {
+    setTimeout(() => { 
+      setIsItVisible(false)
+    }, 2000);
+  }
 
   const handleSubmit = e => {
     e.preventDefault()
     console.log(email, password)
+
     firebaseApp.auth().createUserWithEmailAndPassword(email, password)
     .catch(error => {
-      console.log(error.message)
       setErrorMsg(error.message)
+      setIsItVisible(true)
+      dismissMessage()
     })
   }
 
@@ -48,7 +57,7 @@ const SignUp = props => {
         </div>
       </div>
       {
-        errorMsg.length !== 0 && 
+        (errorMsg.length !== 0 && isItVisible) &&
         <div className="alert alert-danger" role="alert">
           {errorMsg}
         </div>
