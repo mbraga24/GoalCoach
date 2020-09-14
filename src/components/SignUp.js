@@ -6,33 +6,30 @@ import { firebaseApp } from '../firebase';
 
 const SignUp = props => {
 
-  const [ email, setEmail, resetEmail ] = userInputState("")
-  const [ password, setPassword, resetPassword ] = userInputState("")
+  const [ email, setEmail ] = userInputState("")
+  const [ password, setPassword ] = userInputState("")
   const [ errorMsg, setErrorMsg ] = useState("")
 
   const handleSubmit = e => {
     e.preventDefault()
 
-    // firebaseApp.auth().createUserWithEmailAndPassword(email, password)
-    // .catch(error => {
-    //   setErrorMsg(error.message)
-    // })
-
-    firebaseApp.auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(user => {
-      if (user) {
-        console.log('User has signed up', user)
-        props.history.push('/dashboard')
-      }
-    })
+    firebaseApp.auth().createUserWithEmailAndPassword(email, password)
     .catch(error => {
       setErrorMsg(error.message)
     })
-
-    resetEmail()
-    resetPassword()
   }
+
+  //   firebaseApp.auth()
+  //   .createUserWithEmailAndPassword(email, password)
+  //   .then(user => {
+  //     if (user) {
+  //       console.log('User has signed up', user)
+  //       props.history.push('/dashboard')
+  //     }
+  //   })
+  //   .catch(error => {
+  //     setErrorMsg(error.message)
+  //   })
 
   return (
     <form onSubmit={handleSubmit} className={styles.SignUpForm}>
@@ -76,4 +73,4 @@ const SignUp = props => {
   );
 }
 
-export default SignUp;
+export default SignUp
