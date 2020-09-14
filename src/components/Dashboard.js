@@ -3,6 +3,8 @@ import { SIGNED_IN } from '../store/type';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { firebaseApp } from '../firebase';
+import AddGoal from './AddGoal';
+import GoalList from './GoalList';
 
 const Dashboard = props => {
 
@@ -14,15 +16,17 @@ const Dashboard = props => {
     dispatch({ type: SIGNED_IN, payload: null })
   }
 
-  console.log(props.history)
-
   return (
     <div>
+      <h3>Goals</h3>
+      <AddGoal />
+      <h3>Goal List</h3>
+      <GoalList />
       <button
-      className="btn btn-danger"
-      onClick={signOut}
+        className="btn btn-danger"
+        onClick={signOut}
       >
-        Sign Out
+        Sign out
       </button>
     </div>
     );
