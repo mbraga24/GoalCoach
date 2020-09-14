@@ -6,32 +6,18 @@ import { firebaseApp } from '../firebase';
 
 const SignUp = props => {
 
-  const [ email, setEmail, resetEmail ] = userInputState("")
-  const [ password, setPassword, resetPassword ] = userInputState("")
+  const [ email, setEmail ] = userInputState("")
+  const [ password, setPassword ] = userInputState("")
   const [ errorMsg, setErrorMsg ] = useState("")
 
   const handleSubmit = e => {
     e.preventDefault()
-
-    // firebaseApp.auth().createUserWithEmailAndPassword(email, password)
-    // .catch(error => {
-    //   setErrorMsg(error.message)
-    // })
-
-    firebaseApp.auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(user => {
-      if (user) {
-        console.log('User has signed up', user)
-        props.history.push('/dashboard')
-      }
-    })
+    console.log(email, password)
+    firebaseApp.auth().createUserWithEmailAndPassword(email, password)
     .catch(error => {
+      console.log(error.message)
       setErrorMsg(error.message)
     })
-
-    resetEmail()
-    resetPassword()
   }
 
   return (

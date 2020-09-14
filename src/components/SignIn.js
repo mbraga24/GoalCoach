@@ -6,29 +6,16 @@ import { firebaseApp } from '../firebase';
 
 const SignIn = props => {
 
-  const [ email, setEmail, resetEmail ] = userInputState("")
-  const [ password, setPassword, resetPassword ] = userInputState("")
+  const [ email, setEmail ] = userInputState("")
+  const [ password, setPassword ] = userInputState("")
   const [ errorMsg, setErrorMsg ] = useState("")
 
   const handleSubmit = e => {
     e.preventDefault()
-
-    // firebaseApp.auth().signInWithEmailAndPassword(email, password)
-    // .catch(error => {
-    //   setErrorMsg(error.message)
-    // })
-
-    firebaseApp.auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(user => {
-      if (user) {
-        console.log('user has signed in', user);
-        resetEmail()
-        resetPassword()        
-        props.history.push('/dashboard')
-      }
-    })
+    console.log(email, password)
+    firebaseApp.auth().signInWithEmailAndPassword(email, password)
     .catch(error => {
+      console.log(error.message)
       setErrorMsg(error.message)
     })
   }
