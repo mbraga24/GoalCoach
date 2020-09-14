@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
+import { SET_GOALS } from '../store/type';
+import { useDispatch, useSelector } from 'react-redux';
 import { goalRef } from '../firebase';
 
 const GoalList = () => {
+
+  const dispatch = useDispatch()
+  const goals = useSelector(state => state.goal.goals)
 
   useEffect(() => {
     goalRef.on('value', snap => {
@@ -10,9 +15,11 @@ const GoalList = () => {
         const { email, title } = goal.val()
         goals.push({ email, title })
       })
-      console.log("GOALS - GOAL LIST: ", goals)
+      dispatch({ type: SET_GOALS, payload: goals })
     })
-  }, [])
+  }, [dispatch])
+  
+  console.log("GOALS - GOAL LIST: ", goals)
 
   return (
     <div>
