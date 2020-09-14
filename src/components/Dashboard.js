@@ -12,6 +12,7 @@ const Dashboard = props => {
   const dispatch = useDispatch()
 
   const signOut = () => {
+    // signing user out
     firebaseApp.auth().signOut()
     props.history.push('/signin')
     dispatch({ type: SIGNED_IN, payload: null })

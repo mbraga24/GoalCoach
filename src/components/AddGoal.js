@@ -7,29 +7,36 @@ import styles from './AddGoal.module.sass';
 const AddGoal = () => {
 
   const email = useSelector(state => state.user.logUser.email)
-  const [ goal, setGoal ] = userInputState("")
+  const [ title, setTitle ] = userInputState("")
+  const [ description, setDescription ] = userInputState("")
 
   const handleSubmitGoal = e => {
     e.preventDefault()
-    const title = goal
-    console.log(email, title)
-    goalRef.push({ email, title })
+    goalRef.push({ email, title, description })
   }
 
   return ( 
     <form onSubmit={handleSubmitGoal}>
-      <div className="form-inline">
-        <div className="form-group">
+      <div className="form">
+        <div className={`${styles.AddGoalFields} form-group`}>
           <input 
             type="text"
             className="form-control"
-            placeholder="Add a goal"
-            name="newGoal"
-            value={goal}
-            onChange={setGoal}
+            placeholder="title"
+            name="title"
+            value={title}
+            onChange={setTitle}
+          />
+          <textarea 
+            type="text"
+            className="form-control"
+            placeholder="description"
+            name="description"
+            value={description}
+            onChange={setDescription}
           />
           <button
-            className={`${styles.AddGoalButton} btn btn-success`}
+            className="btn btn-success"
             type="submit"
           >
             Submit

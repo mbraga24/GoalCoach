@@ -10,28 +10,28 @@ const GoalList = () => {
   const goals = useSelector(state => state.goals.goals)
 
   useEffect(() => {
+    // Reading data from firebase database
     goalRef.on('value', snap => {
       const collectGoals = []
       snap.forEach(goal => {
-        const { email, title } = goal.val()
-        collectGoals.push({ email, title })
+        const { email, title, description } = goal.val()
+        collectGoals.push({ email, title, description })
       })
-      console.log("USE EFFECT")
       dispatch({ type: SET_GOALS, payload: collectGoals })
     })
   }, [dispatch])
 
   const renderGoalItems = () => {
-    return goals.map((goal) => (
-       <GoalItem goal={goal} />
+    return goals.map((goal, index) => (
+       <GoalItem key={index} goal={goal} />
     ))   
   }
   
   console.log("GOALS - GOAL LIST: ", goals)
 
   return (
-    <div class="list-group">
-      { goals ? renderGoalItems() : null}
+    <div className="list-group">
+      {renderGoalItems()}
     </div>
   )
 }

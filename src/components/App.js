@@ -14,6 +14,7 @@ const App = props => {
   const loggedInUser = useSelector(state => state.user.logUser)
 
   useEffect(() => {
+    // authenticate user
     firebaseApp.auth().onAuthStateChanged(authUser => {
       if (authUser) {
         dispatch({ type: SIGNED_IN, payload: authUser })
@@ -21,7 +22,6 @@ const App = props => {
     })
   }, [dispatch])
 
-  // console.log("APP: ", user)
   return (
     <div>
       <Switch>
