@@ -28,7 +28,7 @@ const App = props => {
         {
           loggedInUser ?
           <>
-            <Route path="/dashboard" render={ () => <Dashboard />}/>
+            <Route path="/dashboard" component={Dashboard} />
             <Redirect to="/dashboard" />
           </> 
           :

@@ -8,6 +8,7 @@ const reducer = (state = defaultState, action) => {
   switch(action.type) {
     case SIGNED_IN:
       return {
+        ...state,
         logUser: action.payload
       }
     default:

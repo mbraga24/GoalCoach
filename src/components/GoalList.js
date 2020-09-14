@@ -6,16 +6,16 @@ import { goalRef } from '../firebase';
 const GoalList = () => {
 
   const dispatch = useDispatch()
-  const goals = useSelector(state => state.goal.goals)
+  const goals = useSelector(state => state.goals)
 
   useEffect(() => {
     goalRef.on('value', snap => {
-      const goals = []
+      const collectGoals = []
       snap.forEach(goal => {
         const { email, title } = goal.val()
-        goals.push({ email, title })
+        collectGoals.push({ email, title })
       })
-      dispatch({ type: SET_GOALS, payload: goals })
+      dispatch({ type: SET_GOALS, payload: collectGoals })
     })
   }, [dispatch])
   

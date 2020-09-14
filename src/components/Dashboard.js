@@ -3,6 +3,7 @@ import { SIGNED_IN } from '../store/type';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { firebaseApp } from '../firebase';
+import styles from './Dashboard.module.sass';
 import AddGoal from './AddGoal';
 import GoalList from './GoalList';
 
@@ -17,7 +18,7 @@ const Dashboard = props => {
   }
 
   return (
-    <div>
+    <div className={styles.Dashboard}>
       <h3>Goals</h3>
       <AddGoal />
       <h3>Goal List</h3>

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import userInputState from '../hooks/userInputState';
 import { goalRef } from '../firebase';
+import styles from './AddGoal.module.sass';
 
 const AddGoal = () => {
 
@@ -28,7 +29,7 @@ const AddGoal = () => {
             onChange={setGoal}
           />
           <button
-            className="btn btn-success"
+            className={`${styles.AddGoalButton} btn btn-success`}
             type="submit"
           >
             Submit

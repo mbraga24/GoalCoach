@@ -1,10 +1,10 @@
 import { createStore, combineReducers } from 'redux';
-import reducerUser from './reducerUser';
-import reducerGoals from './reducerGoals';
+import user from './reducerUser';
+import goals from './reducerGoals';
 
 const rootReducer = combineReducers({
-  user: reducerUser, 
-  goal: reducerGoals
+  user,
+  goals
 })
 
 const store = createStore(rootReducer)
