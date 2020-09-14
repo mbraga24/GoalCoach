@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { SIGNED_IN } from '../store/type';
+import { useDispatch, useSelector } from 'react-redux';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Dashboard from './Dashboard';
@@ -8,26 +10,25 @@ import { firebaseApp } from '../firebase';
 
 const App = props => {
 
-  const [ user, setUser ] = useState(null)
+  const dispatch = useDispatch()
+  const loggedInUser = useSelector(state => state.user.logUser)
 
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged(authUser => {
       if (authUser) {
-        setUser(authUser)
-      } else {
-        setUser(null)
+        dispatch({ type: SIGNED_IN, payload: authUser })
       }
     })
-  }, [user])
+  }, [dispatch])
 
   // console.log("APP: ", user)
   return (
     <div>
       <Switch>
         {
-          user ?
+          loggedInUser ?
           <>
-            <Route path="/dashboard" render={ () => <Dashboard resetUser={setUser}/>}/>
+            <Route path="/dashboard" render={ () => <Dashboard />}/>
             <Redirect to="/dashboard" />
           </> 
           :
