@@ -2,13 +2,13 @@ import * as firebase from 'firebase';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: "goalcoach-5af8c.firebaseapp.com",
-  databaseURL: "https://goalcoach-5af8c.firebaseio.com",
-  projectId: "goalcoach-5af8c",
-  storageBucket: "goalcoach-5af8c.appspot.com",
-  messagingSenderId: "129895719940",
-  appId: "1:129895719940:web:a8dea79c3b9bc12bcd8151",
-  measurementId: "G-6LLXWTCFEW"
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+  appId: process.env.REACT_APP_API_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig)
