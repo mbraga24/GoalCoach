@@ -13,10 +13,14 @@ const GoalList = () => {
     // Reading data from firebase database
     goalRef.on('value', snap => {
       const collectGoals = []
+      // Loop through each goal from the database
       snap.forEach(goal => {
         const { email, title, description } = goal.val()
-        collectGoals.push({ email, title, description })
+        // Goal unique key
+        const serverKey = goal.key
+        collectGoals.push({ email, title, description, serverKey })
       })
+      // Set goals global state
       dispatch({ type: SET_GOALS, payload: collectGoals })
     })
   }, [dispatch])
@@ -26,8 +30,6 @@ const GoalList = () => {
        <GoalItem key={index} goal={goal} />
     ))   
   }
-  
-  console.log("GOALS - GOAL LIST: ", goals)
 
   return (
     <div className="list-group">

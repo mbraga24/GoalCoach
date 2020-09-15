@@ -20,7 +20,7 @@ const SignUp = props => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    // authenticate user email and password for sign up
+    // Authenticate user email and password for sign up
     firebaseApp.auth().createUserWithEmailAndPassword(email, password)
     .catch(error => {
       setErrorMsg(error.message)

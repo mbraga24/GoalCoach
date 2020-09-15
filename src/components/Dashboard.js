@@ -6,13 +6,14 @@ import { firebaseApp } from '../firebase';
 import styles from './Dashboard.module.sass';
 import AddGoal from './AddGoal';
 import GoalList from './GoalList';
+import CompleteGoalList from './CompleteGoalList';
 
 const Dashboard = props => {
 
   const dispatch = useDispatch()
 
   const signOut = () => {
-    // signing user out
+    // Signing user out
     firebaseApp.auth().signOut()
     props.history.push('/signin')
     dispatch({ type: SIGNED_IN, payload: null })
@@ -20,10 +21,12 @@ const Dashboard = props => {
 
   return (
     <div className={styles.Dashboard}>
-      <h3>Goals</h3>
+      <h3>Goal Coach</h3>
       <AddGoal />
-      <h3>Goal List</h3>
+      <h3>Goals</h3>
       <GoalList />
+      <h3>Completed Goals</h3>
+      <CompleteGoalList />
       <button
         className="btn btn-danger"
         onClick={signOut}

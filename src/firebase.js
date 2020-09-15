@@ -12,4 +12,6 @@ const firebaseConfig = {
 };
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig)
+// These are the constants to connect to the firebase database
 export const goalRef = firebase.database().ref('goals')
+export const completeGoalRef = firebase.database().ref('completeGoal')

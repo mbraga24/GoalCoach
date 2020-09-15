@@ -20,7 +20,7 @@ const SignIn = props => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    // authenticate user email and password for sign in
+    // Authenticate user email and password for sign in
     firebaseApp.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
       props.history.push('/dashboard')
